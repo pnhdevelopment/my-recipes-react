@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Link } from "react-router-dom";
+import './Meal.css';
 
 
 class Meal extends React.Component {
@@ -15,11 +16,8 @@ class Meal extends React.Component {
   }
   
   componentDidMount () {
-      console.log(this.props.match.params.mealName);
 
-    URL = 'http://bibletopia.net/wp-json/wp/v2/posts?_embed&slug=' + this.props.match.params.mealName;
-
-    console.log(URL)
+    URL = "https://my-recipes-api.pnhdevelopment.com/wp-json/wp/v2/posts?_embed&slug=" + this.props.match.params.mealName;
 
     fetch(URL)
       .then(res => res.json())
@@ -41,10 +39,12 @@ class Meal extends React.Component {
         }
       )
 
-  
   }
 
 
+  handleImageLoaded(event){
+    event.target.style.opacity = 1;
+  }
 
   componentWillReceiveProps(){
   	console.log(this.props.match.params.mealName);
@@ -61,14 +61,29 @@ class Meal extends React.Component {
       return <div className="loader"></div>;
     } else {
       return (
-        <div className="col-8 m-auto text-center">
-            <h1>{ item.title.rendered }</h1>
-            <img src={ item["_embedded"]["wp:featuredmedia"][0]["source_url"] } />
-            <div dangerouslySetInnerHTML={{ __html: item.content.rendered }}></div>
-        </div>
+
+            <div className="container">
+
+              <div className="col-8 m-auto">
+
+                <h1 className="text-center">{ item.title.rendered }</h1>
+
+                <div className="meal-wrapper">
+                  <img
+                    src={ item["_embedded"]["wp:featuredmedia"][0]["source_url"] }
+                    onLoad={this.handleImageLoaded}
+                  />
+                </div>
+                
+                <div dangerouslySetInnerHTML={{ __html: item.content.rendered }}></div>
+
+              </div>
+
+            </div>
+
+
       );
     }
-    
     
 
   }

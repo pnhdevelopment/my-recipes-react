@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Meals extends React.Component {
 
@@ -14,7 +14,10 @@ class Meals extends React.Component {
   
   componentDidMount () {
 
-    fetch("http://bibletopia.net/wp-json/wp/v2/media")
+    const URL = "https://my-recipes-api.pnhdevelopment.com/wp-json/wp/v2/posts?_embed&categories=" + this.props.match.params.id;
+
+
+    fetch(URL)
       .then(res => res.json())
       .then(
         (result) => {
@@ -33,18 +36,18 @@ class Meals extends React.Component {
           });
         }
       )
-  	
-	
+  }
 
+
+  handleImageLoaded(event) {
+    event.target.style.opacity = 1;
   }
 
   	
-
-
-
   componentWillReceiveProps(){
   	console.log(this.props.match.params.meal);
   }
+
 
   render() {
     
@@ -52,15 +55,19 @@ class Meals extends React.Component {
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div class="loader"></div>;
+      return <div className="loader"></div>;
     } else {
       return (
-        <div className="image-wrapper">
+        <div className="image-wrapper m-3">
           {items.map(item => (
-            <Link to="/dinner/my-slug">
-              <div className="inner-image-wrapper" key={item.id}>
+            <Link to={`${this.props.match.params.id}/${item.slug}`} key={item.id} >
+              <div className="inner-image-wrapper" >
                 <div>
-                  <img src={item.guid.rendered} alt="" />
+                  <img
+                    src={item["_embedded"]["wp:featuredmedia"][0]["source_url"]}
+                    alt="{item.title.rendered}"
+                    onLoad={this.handleImageLoaded}
+                  />
                 </div>
               </div>
             </Link>

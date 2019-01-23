@@ -5,10 +5,8 @@ html{
 body{
 	height: 100%;
 	position: relative;
-	/*overflow: hidden;*/
+	font-family: 'Open Sans', sans-serif;
 }
-
-
 
 div.menu{
 	background: rgba(0, 0, 0, 0.7);
@@ -27,7 +25,7 @@ div.menu ul{
 
 div.menu ul li{
 	display: inline-block;
-	padding: 1rem;
+	padding: 0.6rem;
 }
 
 div.menu ul li a{
@@ -51,17 +49,18 @@ div.menu ul li a:hover{
 
 
 .image-wrapper {
-    -webkit-column-count: 3; /* Chrome, Safari, Opera */
-    -moz-column-count: 3; /* Firefox */
-    column-count: 3;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
 }
 
-  .image-wrapper img{
-	width: 100%;
-	position: absolute;
-	top:0;
+@media only screen and (min-width: 600px) {
+	.image-wrapper {
+	    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+	    -moz-column-count: 3; /* Firefox */
+	    column-count: 3;
+	}
 }
-
 
 
 .inner-image-wrapper{
@@ -70,5 +69,20 @@ div.menu ul li a:hover{
     background-image: linear-gradient(141deg, #FFAFBD 51%, #ffc3a0 75%);
 	width:100%;
 	position: relative;
-	padding-top: 100%;
+	padding-bottom: 56.25%;
+	-webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 } 
+
+
+.inner-image-wrapper img{
+	width: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	opacity: 0;
+	transition: 1s;
+}
+
+

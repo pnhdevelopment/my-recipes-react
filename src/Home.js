@@ -16,7 +16,9 @@ class Home extends React.Component {
 
   componentDidMount () {
 
-    fetch("https://www.my-recipes-api.pnhdevelopment.com/wp-json/wp/v2/media")
+  	document.body.style.overflow = "hidden";
+
+    fetch("https://www.my-recipes-api.pnhdevelopment.com/wp-json/wp/v2/media?per_page=16")
       .then(res => res.json())
       .then(
         (result) => {
@@ -36,8 +38,15 @@ class Home extends React.Component {
         }
       )
   	
-	
+  }
 
+
+  componentWillUnmount(){
+  	document.body.style.overflow = "auto";
+  }
+
+  handleImageLoaded(event) {
+  	event.target.style.opacity = 1;
   }
 
   
@@ -54,32 +63,30 @@ class Home extends React.Component {
 	      			<img src="logo.svg" />
 			      	<ul>
 				        <li>
-				          <Link to="/">Home</Link>
+				          <Link to="/breakfast/2">Breakfast</Link>
 				        </li>
 				        <li>
-				          <Link to="/breakfast">Breakfast</Link>
+				          <Link to="/lunch/3">Lunch</Link>
 				        </li>
 				        <li>
-				          <Link to="/lunch">Lunch</Link>
+				          <Link to="/dinner/4">Dinner</Link>
 				        </li>
 				        <li>
-				          <Link to="/dinner">Dinner</Link>
+				          <Link to="/dessert/6">Dessert</Link>
 				        </li>
 				        <li>
-				          <Link to="/dessert">Dessert</Link>
-				        </li>
-				        <li>
-				          <Link to="/drinks">Drinks</Link>
+				          <Link to="/drinks/5">Drinks</Link>
 				        </li>
 			    	</ul>
 		    	</div>
 				
-				<div className="image-wrapper">
+				<div className="image-wrapper m-3">
 					{items.map(item => (
 						<div className="inner-image-wrapper" key={item.id}>
-							<div>
-								<img src={item.guid.rendered} />
-							</div>
+							<img
+								src={item.source_url}
+								onLoad={this.handleImageLoaded}
+							/>
 						</div>
 					))}
 				</div>

@@ -25,8 +25,5 @@ class App extends Component {
   }
 }
 
-// <Route path="/:id" component={Item} />
-
-
 
 export default App;

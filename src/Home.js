@@ -196,6 +196,7 @@ class Home extends React.Component {
 							<img
 								src={item.source_url}
 								onLoad={this.handleImageLoaded}
+								alt={item.title.rendered}
 							/>
 						</div>
 					))}

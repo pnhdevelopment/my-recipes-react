@@ -65,7 +65,7 @@ class Meals extends React.Component {
                 <div>
                   <img
                     src={item["_embedded"]["wp:featuredmedia"][0]["source_url"]}
-                    alt="{item.title.rendered}"
+                    alt={item.title.rendered}
                     onLoad={this.handleImageLoaded}
                   />
                 </div>

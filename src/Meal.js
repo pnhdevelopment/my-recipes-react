@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import './Meal.css';
 
 
@@ -61,28 +62,33 @@ class Meal extends React.Component {
       return <div className="loader"></div>;
     } else {
       return (
+        <React.Fragment>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>{item.title.rendered + ' - My Recipes'}</title>
+            <meta name="description" content={item.title.rendered} />
+            <meta name="author" content="pnhdevelopment" />
+            <meta name="keywords" content="Recipes, Breakfast, Lunch, Dinner, Drinks" />
+          </Helmet>
 
-            <div className="container">
+          <div className="container">
+            <div className="col-8 m-auto">
 
-              <div className="col-8 m-auto">
+              <h1 className="text-center">{ item.title.rendered }</h1>
 
-                <h1 className="text-center">{ item.title.rendered }</h1>
-
-                <div className="meal-wrapper">
-                  <img
-                    src={ item["_embedded"]["wp:featuredmedia"][0]["source_url"] }
-                    onLoad={this.handleImageLoaded}
-                    alt={item.title.rendered}
-                  />
-                </div>
-                
-                <div dangerouslySetInnerHTML={{ __html: item.content.rendered }}></div>
-
+              <div className="meal-wrapper">
+                <img
+                  src={ item["_embedded"]["wp:featuredmedia"][0]["source_url"] }
+                  onLoad={this.handleImageLoaded}
+                  alt={item.title.rendered}
+                />
               </div>
+              
+              <div dangerouslySetInnerHTML={{ __html: item.content.rendered }}></div>
 
             </div>
-
-
+          </div>
+        </React.Fragment>
       );
     }
     

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import './Home.css';
 
 
@@ -59,8 +60,15 @@ class Home extends React.Component {
 	    } else {
 	      return (
 	      	<React.Fragment>
-	      		<div className="menu">
-	      			
+	      		<Helmet>
+	                <meta charSet="utf-8" />
+	                <title>My Recipes</title>
+	                <meta name="description" content="A collection of delicious recipes. Ideal for breakfast, lunch or dinner." />
+	                <meta name="author" content="pnhdevelopment" />
+	                <meta name="keywords" content="Recipes, Breakfast, Lunch, Dinner, Drinks" />
+	            </Helmet>
+
+	      		<div className="menu">	
 					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 224 74">
 						<g>
 							<path className="st0" d="M47.5,15.6c-0.2,0.8-0.3,1.5-0.4,1.9c-0.1,0.4-0.4,1.6-1,3.6c-0.6,2.4-1.1,4.9-1.7,7.4

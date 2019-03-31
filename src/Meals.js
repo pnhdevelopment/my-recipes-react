@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 class Meals extends React.Component {
 
@@ -58,6 +59,13 @@ class Meals extends React.Component {
       return <div className="loader"></div>;
     } else {
       return (
+      <React.Fragment>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{items[0]['_embedded']['wp:term'][0][0]['name'] + " - My Recipes"} </title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+
         <div className="image-wrapper m-3">
           {items.map(item => (
             <Link to={`${this.props.match.params.id}/${item.slug}`} key={item.id} >
@@ -73,6 +81,7 @@ class Meals extends React.Component {
             </Link>
           ))}
         </div>
+      </React.Fragment>
       );
     }
 
